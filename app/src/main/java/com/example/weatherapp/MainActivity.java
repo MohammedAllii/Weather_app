@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     EditText editText;
-    Button button, locate, forecast;
+    Button button;
     ImageView imageView;
     TextView temptv, time, longitude, latitude, humidity, pressure, wind, country, city_nam;
     private ViewGroup dayGroup;
@@ -113,9 +113,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
-
-
     }
 
     @Override
@@ -123,7 +120,6 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
         getPref();
     }
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -131,8 +127,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void FindWeather(String city) {
-
-
         String url = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=e53301e27efa0b66d05045d91b2742d3&units=metric";
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
@@ -183,8 +177,6 @@ public class MainActivity extends AppCompatActivity {
                             int humidity_find = object4.getInt("humidity");
                             humidity.setText(humidity_find + "  %");
 
-
-
                             //pressure
                             JSONObject object7 = jsonObject.getJSONObject("main");
                             String pressure_find = object7.getString("pressure");
@@ -195,27 +187,20 @@ public class MainActivity extends AppCompatActivity {
                             String wind_find = object9.getString("speed");
                             wind.setText(wind_find + "  km/h");
 
-
-
                             //description
                             JSONArray jsonArray1 = jsonObject.getJSONArray("weather");
                             JSONObject obj1 = jsonArray1.getJSONObject(0);
                             String desc = obj1.getString("description");
-
                             savePref(String.valueOf(temp), count, city, icon, date, String.valueOf(lat_find), String.valueOf(long_find), wind_find, humidity_find,
                                     pressure_find, desc);
 
-
                             //mettre à jour le widget
                             updateWidget(count,city,desc,date,temp,wind_find,pressure_find,humidity_find,icon);
-
-
 
                         } catch (JSONException e) {
 
                             e.printStackTrace();
                         }
-
                     }
                 }, new Response.ErrorListener() {
             //si ville inconnu
@@ -230,37 +215,28 @@ public class MainActivity extends AppCompatActivity {
         requestQueue.add(stringRequest);
 
     }
-
-
     private void located(Location location) {
         double lat = location.getLatitude();
         double lng = location.getLongitude();
 
         if (!Geocoder.isPresent()) {
-            Toast.makeText(getApplicationContext(), "Les coordonnées sont indisponibles", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "invalide", Toast.LENGTH_LONG).show();
             return;
         }
-
         Geocoder geocoder = new Geocoder(this);
 
         try {
             List<Address> addressList = geocoder.getFromLocation(lat, lng, ADDRESSES);
             if (addressList == null) {
-                Toast.makeText(getApplicationContext(), "Les coordonnées sont indisponibles", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "invalide", Toast.LENGTH_LONG).show();
                 return;
             }
-
             city = addressList.get(0).getAdminArea();
-            // Toast.makeText(getApplicationContext(), city,Toast.LENGTH_LONG).show();
-
-
         } catch (Exception e) {
 
             e.printStackTrace();
         }
     }
-
-
     public void savePref(String temp, String country, String cityName, String icon, String date,
                          String lat_find, String long_find, String wind_find, int humidity_find,
                          String pressure_find,
@@ -274,8 +250,6 @@ public class MainActivity extends AppCompatActivity {
         editor.putString(WWPREF_ICON, icon);
         editor.putString(WWPREF_DATE, date);
         editor.putString(WWPREF_LAT, lat_find);
-        //editor.putString(WWPREF_LAT, "koussay");
-        Log.d("lat_find          :", "             " + lat_find);
         editor.putString(WWPREF_LNG, long_find);
         editor.putString(WWPREF_HUMD, String.valueOf(humidity_find));
         editor.putString(WWPREF_PRSS, pressure_find);
@@ -307,12 +281,6 @@ public class MainActivity extends AppCompatActivity {
 
 
         }
-    }
-    // Vérifie si le terminal est connecté à Internet
-    private boolean isNetworkAvailable(Context context) {
-        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-        return activeNetwork != null && activeNetwork.isConnected();
     }
     public void updateWidget(String count, String city,String date, String desc, Double temp, String wind_find, String pressure_find, int humidity_find, String icon){
         // Créer une instance de AppWidgetManager

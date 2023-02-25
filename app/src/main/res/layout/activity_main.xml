@@ -8,6 +8,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:scrollbarSize="8dp"
+    android:background="@drawable/background"
     tools:context=".MainActivity">
 
 
@@ -206,7 +207,7 @@
             android:layout_marginLeft="15dp"
             android:layout_marginTop="5dp"
             android:text="Latitude"
-            android:textColor="#05A4EC"
+            android:textColor="#000000"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView5" />
@@ -219,7 +220,7 @@
             android:layout_marginLeft="15dp"
             android:layout_marginTop="5dp"
             android:text="Longitude"
-            android:textColor="#05A4EC"
+            android:textColor="#000000"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView15" />
@@ -233,7 +234,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginBottom="30dp"
             android:text="Wind Speed"
-            android:textColor="#05A4EC"
+            android:textColor="#000000"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -247,7 +248,7 @@
             android:layout_marginLeft="15dp"
             android:layout_marginTop="5dp"
             android:text="Humidity"
-            android:textColor="#05A4EC"
+            android:textColor="#000000"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView16" />
@@ -275,7 +276,7 @@
             android:layout_marginLeft="15dp"
             android:layout_marginTop="5dp"
             android:text="Pressure"
-            android:textColor="#05A4EC"
+            android:textColor="#000000"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView20" />
@@ -288,7 +289,7 @@
             android:layout_marginLeft="15dp"
             android:layout_marginTop="30dp"
             android:text="Feels Like"
-            android:textColor="#05A4EC"
+            android:textColor="#000000"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

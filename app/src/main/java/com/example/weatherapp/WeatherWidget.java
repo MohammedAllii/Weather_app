@@ -85,11 +85,8 @@ public class WeatherWidget extends AppWidgetProvider {
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
 
-        if(isNetworkAvailable(context)&&preferences.contains(MainActivity.WWPREF_CITY)){
-            FindWeather(preferences.getString(MainActivity.WWPREF_CITY, ""), views, preferences, context, appWidgetIds);
-        }
 
-       else if (preferences.contains(MainActivity.WWPREF_TEMP))
+       if (preferences.contains(MainActivity.WWPREF_TEMP))
         {
             views.setTextViewText(R.id.location,preferences.getString(MainActivity.WWPREF_COUNTRY, "")+", "+preferences.getString(MainActivity.WWPREF_CITY, ""));
             views.setTextViewText(R.id.date, preferences.getString(MainActivity.WWPREF_DATE, ""));
@@ -110,7 +107,7 @@ public class WeatherWidget extends AppWidgetProvider {
 
 
 
-        String url = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=462f445106adc1d21494341838c10019&units=metric";
+        String url = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=e53301e27efa0b66d05045d91b2742d3&units=metric";
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -264,33 +261,11 @@ public class WeatherWidget extends AppWidgetProvider {
         editor.putString(MainActivity.WWPREF_ICON, icon);
         editor.putString(MainActivity.WWPREF_DATE, date);
         editor.putString(MainActivity.WWPREF_LAT, lat_find);
-        //editor.putString(WWPREF_LAT, "koussay");
-        Log.d("lat_find          :","             "+lat_find);
         editor.putString(MainActivity.WWPREF_LNG, long_find);
         editor.putString(MainActivity.WWPREF_HUMD, String.valueOf(humidity_find));
         editor.putString(MainActivity.WWPREF_PRSS, pressure_find);
         editor.putString(MainActivity.WWPREF_WIND, wind_find);
-
         editor.putString(MainActivity.WWPREF_DESC, desc);
-
-
-
         editor.apply();
     }
-
-
-
-
-
-
-
-    // Vérifie si le terminal est connecté à Internet
-    private boolean isNetworkAvailable(Context context) {
-        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-        return activeNetwork != null && activeNetwork.isConnected();
-    }
-
-
-
 }

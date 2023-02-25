@@ -11,7 +11,7 @@ tools:ignore="UselessParent">
     android:id="@+id/widget"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/logo2"
+    android:background="@drawable/logo4"
     android:orientation="vertical">
 
     <LinearLayout
